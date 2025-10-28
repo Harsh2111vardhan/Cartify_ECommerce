@@ -1,0 +1,14 @@
+com\store\onlinestore\entity\CartItem.class
+com\store\onlinestore\entity\Product.class
+com\store\onlinestore\service\OrderService.class
+com\store\onlinestore\controller\HomeController.class
+com\store\onlinestore\repository\OrderRepository.class
+com\store\onlinestore\repository\CartRepository.class
+com\store\onlinestore\repository\ProductRepository.class
+com\store\onlinestore\controller\ProductController.class
+com\store\onlinestore\service\CartService.class
+com\store\onlinestore\service\ProductService.class
+com\store\onlinestore\entity\Order.class
+com\store\onlinestore\controller\CartController.class
+com\store\onlinestore\OnlinestoreApplication.class
+com\store\onlinestore\controller\OrderController.class

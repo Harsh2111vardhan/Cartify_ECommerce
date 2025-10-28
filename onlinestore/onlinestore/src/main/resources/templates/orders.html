@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Cartify</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Cartify</div>
+            <ul class="nav-links">
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/products}">Products</a></li>
+                <li><a th:href="@{/cart}">Cart</a></li>
+                <li><a th:href="@{/orders}">Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="orders">
+        <div class="container">
+            <h1>Order History</h1>
+            
+            <div th:if="${orders.empty}">
+                <div class="empty-orders">
+                    <h2>No orders yet</h2>
+                    <p>Start shopping to place your first order!</p>
+                    <a th:href="@{/products}" class="btn">Start Shopping</a>
+                </div>
+            </div>
+            
+            <div th:unless="${orders.empty}">
+                <div th:each="order : ${orders}" class="order-card">
+                    <div class="order-header">
+                        <h3>Order #<span th:text="${order.id}">123</span></h3>
+                        <span class="order-status" th:text="${order.status}">Pending</span>
+                    </div>
+                    <div class="order-details">
+                        <p><strong>Customer:</strong> <span th:text="${order.customerName}">John Doe</span></p>
+                        <p><strong>Email:</strong> <span th:text="${order.customerEmail}">john@example.com</span></p>
+                        <p><strong>Total Amount:</strong> ₹<span th:text="${#numbers.formatDecimal(order.totalAmount, 1, 2)}">0.00</span></p>
+                        <p><strong>Order Date:</strong> <span th:text="${#temporals.format(order.createdAt, 'yyyy-MM-dd HH:mm')}">2024-01-01</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Cartify. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

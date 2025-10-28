@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Cartify</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Cartify</div>
+            <ul class="nav-links">
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/products}">Products</a></li>
+                <li><a th:href="@{/cart}">Cart</a></li>
+                <li><a th:href="@{/orders}">Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="cart">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            
+            <div th:if="${cartItems.empty}">
+                <div class="empty-cart">
+                    <h2>Your cart is empty</h2>
+                    <p>Start shopping to add items to your cart!</p>
+                    <a th:href="@{/products}" class="btn">Continue Shopping</a>
+                </div>
+            </div>
+            
+            <div th:unless="${cartItems.empty}">
+                <div th:each="item : ${cartItems}" class="cart-item">
+                    <div class="item-info">
+                        <img th:src="${item.imageUrl}" th:alt="${item.productName}" class="cart-item-image">
+                        <div class="item-details">
+                            <h3 th:text="${item.productName}">Product Name</h3>
+                            <p class="item-price" th:text="'₹' + ${#numbers.formatDecimal(item.price, 1, 2)} + ' x ' + ${item.quantity}">₹0.00 x 1</p>
+                            <p class="item-total" th:text="'Total: ₹' + ${#numbers.formatDecimal(item.totalPrice, 1, 2)}">Total: ₹0.00</p>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <form th:action="@{/cart/remove}" method="post" style="display: inline;">
+                            <input type="hidden" name="cartItemId" th:value="${item.id}">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="cart-total">
+                    <h2>Total: ₹<span th:text="${#numbers.formatDecimal(total, 1, 2)}">0.00</span></h2>
+                </div>
+                
+                <div class="cart-actions">
+                    <form th:action="@{/cart/clear}" method="post" style="display: inline-block; margin-right: 10px;">
+                        <button type="submit" class="btn btn-secondary">Clear Cart</button>
+                    </form>
+                    <a th:href="@{/orders/checkout}" class="btn">Checkout</a>
+                    <a th:href="@{/products}" class="btn btn-secondary">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Cartify. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
