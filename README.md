@@ -23,3 +23,5 @@ A sophisticated full-stack Java e-commerce application built with Spring Boot, f
 
 ## 🗃️ Database Setup
 Run the SQL scripts in `database.sql` to set up the database schema.
+
+PPT: https://gamma.app/docs/Cartify-E-Commerce-Platform-86hk04672k983f5 (OR) Use the uploaded pptx file 
